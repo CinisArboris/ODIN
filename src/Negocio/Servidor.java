@@ -1,19 +1,15 @@
 package Negocio;
 
+import Datos.S_BD;
 import Datos.S_POP;
 import Datos.S_PROCESO;
 import Datos.S_SMTP;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.Properties;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -36,6 +32,7 @@ public class Servidor {
         this.cadenaOP = cadenaOP;
     }
     
+    
     /**
      * [01]Cargar el servicio de ::: SMTP.
      */
@@ -46,17 +43,28 @@ public class Servidor {
         S_SMTP hermes_SMTP = new S_SMTP();
         int date;
         
-        hermes_SMTP.setServidor_GMAIL("smtp.gmail.com");  // Datos Servidor
-        hermes_SMTP.setPuerto_GMAIL("465");                     // Datos Servidor
-        
-        hermes_SMTP.setUsuario_GMAIL("USER");  // Datos Usuario
-        hermes_SMTP.setPassword_GMAIL("PASSWORD");     // Datos Usuario
-        
-        hermes_SMTP.setDestinatarios_GMAIL("sariahllopez@gmail.com"); // Datos Destinatarios.
-        hermes_SMTP.setDestinatarios_GMAIL("rapdecohh@gmail.com"); // Datos Destinatarios.
-        hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com"); // Datos Destinatarios.
-        //hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com"); // Datos Destinatarios.
-        //hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com"); // Datos Destinatarios.
+/**
+ * Asignacion de parametros por el usuario y el sistema.
+ * [DS] = Datos del Servidor.
+ * [DU] = Datos del Usuario.
+ */
+hermes_SMTP.setServidor_GMAIL("smtp.gmail.com");// DS
+System.out.println("[servidor SMTP] ::: {smtp.gmail.com}");// DS
+
+hermes_SMTP.setPuerto_GMAIL("465");// DS
+System.out.println("[puerto SMTP]   ::: {465}");// DS
+
+hermes_SMTP.setUsuario_GMAIL("eyver.evm@gmail.com");// DU
+System.out.println("[usuario]       ::: {eyver.evm@gmail.com}");// DU
+
+hermes_SMTP.setPassword_GMAIL("H,./Yv11Egoogle");// DU
+System.out.println("[password]      ::: {********}");// DU
+
+hermes_SMTP.setDestinatarios_GMAIL("sariahllopez@gmail.com");// Datos Destinatarios.
+hermes_SMTP.setDestinatarios_GMAIL("rapdecohh@gmail.com");// Datos Destinatarios.
+hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com");// Datos Destinatarios.
+//hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com"); // Datos Destinatarios.
+//hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com"); // Datos Destinatarios.
         
         //Date date=java.util.Calendar.getInstance().getTime();   // Obtener fecha.
         date= (int)(Math.random()*10000);
@@ -88,7 +96,7 @@ public class Servidor {
                 t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
                 t.close();
                 System.out.println(i);
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             }
         System.out.println("Mensaje enviado :: 200 :: key["+date+"]");
         } catch (MessagingException ex){
@@ -109,54 +117,74 @@ public class Servidor {
         System.out.println("*******      POP SERVER      *******");
         System.out.println("************************************");
         
+        /**
+         * PARTE 01.
+         */
         S_POP hermes_POP = new Datos.S_POP();
-        S_PROCESO hodr = new Datos.S_PROCESO();
-        
         hermes_POP.setServidor_POP("pop.gmail.com");
         System.out.println("[servidor] requerido ::: {pop.gmail.com}");
         hermes_POP.setPuerto_POP("995");
         System.out.println("[puerto]   requerido ::: {995}");
-        hermes_POP.setUsuario_POP("USER");
+        hermes_POP.setUsuario_POP("eyver.evm@gmail.com");
         System.out.println("[email]    requerido ::: {eyver.evm@gmail.com}");
-        hermes_POP.setPassword_POP("PASSWORD");
+        hermes_POP.setPassword_POP("H,./Yv11Egoogle");
+        System.out.println("[password] requerido ::: {********}");
         
+        /**
+         * PARTE 02.
+         */
         hermes_POP.boot_internal();
         hermes_POP.iniciar_session_POP();
         this.setCadenaOP(hermes_POP.operacion_session_POP());
+        
+        
+        /**
+         * PARTE 03.
+         */
+        S_PROCESO hodr = new Datos.S_PROCESO();
         hodr.separar_datos(this.getCadenaOP());
         hermes_POP.cerrar_session_POP();
-        
         System.out.println(this.getCadenaOP());
         System.out.println(hodr.getFuncionVariable());
         System.out.println(hodr.getCuVariable());
+        
+        /**
+         * PARTE 04.
+         */
+        try {
+            this.iniciar_BD(
+                    hodr.getFuncionVariable(),
+                    hodr.getCuVariable(),
+                    hodr.getPARAMETROS()
+            );
+        } catch (SQLException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
      * [03]Cargar el servicio de ::: BD.
      * @throws SQLException 
      */
-    public void conexion_BD() throws SQLException {
+    public void iniciar_BD(String funcionVariable, String cuVariable, ArrayList<String> parametros) throws SQLException {
         System.out.println("************************************");
         System.out.println("*******      BD SERVER       *******");
         System.out.println("************************************");
+        S_BD hermes_BD = new Datos.S_BD();
+        hermes_BD.setHost_BD("localhost");
+        hermes_BD.setPuerto_BD("5432");
+        hermes_BD.setNombre_BD("00_tewe");
+        hermes_BD.setUrl_BD("jdbc:postgresql://"+
+                hermes_BD.getHost_BD() +":"+
+                hermes_BD.getPuerto_BD() +"/"+
+                hermes_BD.getNombre_BD()
+            );
+        hermes_BD.getPropiedades_BD().setProperty("user","postgres");
+        hermes_BD.getPropiedades_BD().setProperty("password","Estragon");
+        hermes_BD.getPropiedades_BD().setProperty("ssl","false");
         
-        String host = "localhost";
-        String bd = "00_tewe";
-        String puerto = ":"+"5432";
-        String url = "jdbc:postgresql://"+host+puerto+"/"+bd+"";
-        Properties props = new Properties();
-        props.setProperty("user","postgres");
-        props.setProperty("password","Estragon");
-        props.setProperty("ssl","false");
-        try (Connection conn = DriverManager.getConnection(url, props)){
-            
-            Thread.sleep(4000);
-            conn.close();
-        } catch (Exception e){
-            System.out.println(e);
-        }
-        
-//        String url = "jdbc:postgresql://localhost/test?user=fred&password=secret&ssl=true";
-//        Connection conn = DriverManager.getConnection(url);
+        hermes_BD.iniciar_session_BD();
+        hermes_BD.operacionA(funcionVariable);
+        hermes_BD.cerrar_session_BD();
     }
 }

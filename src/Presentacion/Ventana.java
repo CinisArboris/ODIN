@@ -60,13 +60,16 @@ public class Ventana {
                     System.out.println("Servicio de escucha.");
                     break;
                 case 4:
-                    System.out.println("Gracias, vuelta pronto :)");
+                    // [false] para salir del ciclo.
                     bandera = false;
+                    System.out.println("Gracias, vuelta pronto :)");
                     break;
                 case 5:
+                    // Descripcion de las opciones.
                     System.out.println(" ... ... ... ... AYUDA");
                     break;
                 default:
+                    // Si no son opciones validas, reintentar.
                     System.out.println("Opcion invalida, reintente");
             }
             /**

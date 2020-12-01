@@ -1,5 +1,6 @@
 package Datos;
 
+import Negocio.Utilidades;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -68,24 +69,34 @@ public class S_PROCESO {
      * @param cadenaOP 
      */
     public void separar_datos(String cadenaOP) {
-        String filtro;
+        // Inicializar variables y utilidades.
+        String filtro = "default";
         StringTokenizer freyja;
-        String cadena;
+        String cadena = "default";
+        boolean bandera = false;
+        Utilidades utils = new Negocio.Utilidades();
         
+        // Inicio de las operaciones.
         cadena = cadenaOP;
-        filtro = "{}";
-        freyja = new StringTokenizer(cadena, filtro);
-        
-        String F_CU;
-        String params;
-        F_CU = freyja.nextToken();
-        params = freyja.nextToken();
-        
-        cadena = F_CU;
-        filtro = "_";
-        freyja = new StringTokenizer(cadena, filtro);
-        this.setFuncionVariable(freyja.nextToken());
-        this.setCuVariable(freyja.nextToken());
+        bandera = utils.verificarSegmentos(cadena);
+        if (bandera){
+            filtro = "{}";
+            freyja = new StringTokenizer(cadena, filtro);
+            
+            // Segunda parte.
+            String F_CU;
+            String params;
+            F_CU = freyja.nextToken();
+            params = freyja.nextToken();
+
+            cadena = F_CU;
+            filtro = "_";
+            freyja = new StringTokenizer(cadena, filtro);
+            this.setFuncionVariable(freyja.nextToken());
+            this.setCuVariable(freyja.nextToken());
+        }else{
+            System.out.println("Error de formato.");
+        }
     }
     
 }
