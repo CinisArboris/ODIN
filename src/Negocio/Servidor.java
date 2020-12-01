@@ -180,7 +180,7 @@ hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com");// Datos Destinatarios
                 hermes_BD.getNombre_BD()
             );
         hermes_BD.getPropiedades_BD().setProperty("user","postgres");
-        hermes_BD.getPropiedades_BD().setProperty("password","Estragon");
+        hermes_BD.getPropiedades_BD().setProperty("password","9999999999");
         hermes_BD.getPropiedades_BD().setProperty("ssl","false");
         
         hermes_BD.iniciar_session_BD();
