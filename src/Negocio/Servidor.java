@@ -57,7 +57,7 @@ System.out.println("[puerto SMTP]   ::: {465}");// DS
 hermes_SMTP.setUsuario_GMAIL("eyver.evm@gmail.com");// DU
 System.out.println("[usuario]       ::: {eyver.evm@gmail.com}");// DU
 
-hermes_SMTP.setPassword_GMAIL("H,./Yv11Egoogle");// DU
+hermes_SMTP.setPassword_GMAIL("8888888888");// DU
 System.out.println("[password]      ::: {********}");// DU
 
 hermes_SMTP.setDestinatarios_GMAIL("sariahllopez@gmail.com");// Datos Destinatarios.
@@ -127,7 +127,7 @@ hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com");// Datos Destinatarios
         System.out.println("[puerto]   requerido ::: {995}");
         hermes_POP.setUsuario_POP("eyver.evm@gmail.com");
         System.out.println("[email]    requerido ::: {eyver.evm@gmail.com}");
-        hermes_POP.setPassword_POP("H,./Yv11Egoogle");
+        hermes_POP.setPassword_POP("8888888888");
         System.out.println("[password] requerido ::: {********}");
         
         /**
