@@ -112,6 +112,12 @@ public class S_BD {
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public void operacionA(String funcionVariable) {
+        if ("list".equals(funcionVariable)) this.list_BD();
+        if ("add".equals(funcionVariable)) this.add_BD();
+        if ("delete".equals(funcionVariable)) this.delete_BD();
+        if ("search".equals(funcionVariable)) this.search_BD();
+                
+        
         System.out.println("OPERATION :: A");
         System.out.println(funcionVariable);
         
@@ -133,5 +139,21 @@ public class S_BD {
         } catch (SQLException ex) {
             Logger.getLogger(S_BD.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+
+    private void list_BD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void search_BD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void delete_BD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void add_BD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

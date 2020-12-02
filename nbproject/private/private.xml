@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Datos/S_PROCESO.java</file>
-            <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Datos/S_CONEXION.java</file>
             <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Negocio/Servidor.java</file>
-            <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Datos/S_POP.java</file>
+            <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Datos/S_BD.java</file>
             <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Presentacion/Ventana.java</file>
-            <file>file:/C:/Users/eyver-dev/Documents/NetBeansProjects/ODIN/src/Datos/S_SMTP.java</file>
         </group>
     </open-files>
 </project-private>

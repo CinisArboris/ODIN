@@ -164,6 +164,9 @@ hermes_SMTP.setDestinatarios_GMAIL("eyver.evm@gmail.com");// Datos Destinatarios
     
     /**
      * [03]Cargar el servicio de ::: BD.
+     * @param funcionVariable
+     * @param cuVariable
+     * @param parametros
      * @throws SQLException 
      */
     public void iniciar_BD(String funcionVariable, String cuVariable, ArrayList<String> parametros) throws SQLException {
